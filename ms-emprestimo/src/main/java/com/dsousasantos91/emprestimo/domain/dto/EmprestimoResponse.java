@@ -1,6 +1,6 @@
 package com.dsousasantos91.emprestimo.domain.dto;
 
-import com.dsousasantos91.emprestimo.domain.enumeration.TipoIdentificador;
+import com.dsousasantos91.emprestimo.domain.enumeration.StatusPagamento;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,13 +16,12 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PessoaResponse {
+public class EmprestimoResponse {
     private Long id;
-    private String nome;
-    private String identificador;
+    private PessoaResponse pessoa;
+    private BigDecimal valorEmprestimo;
+    private Integer numeroParcelas;
+    private StatusPagamento statusPagamento;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataNascimento;
-    private TipoIdentificador tipoIdentificador;
-    private BigDecimal valorMinMensal;
-    private BigDecimal valorMaxEmprestimo;
+    private LocalDate dataCriacao;
 }

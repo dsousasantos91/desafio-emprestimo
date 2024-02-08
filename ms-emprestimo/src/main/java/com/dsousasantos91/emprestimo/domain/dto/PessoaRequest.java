@@ -1,6 +1,7 @@
 package com.dsousasantos91.emprestimo.domain.dto;
 
 import com.dsousasantos91.emprestimo.util.annotations.Identificador;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,5 +26,6 @@ public class PessoaRequest {
     @Identificador
     private String identificador;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 }

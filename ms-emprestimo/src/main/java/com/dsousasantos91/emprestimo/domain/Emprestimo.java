@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -41,11 +42,16 @@ public class Emprestimo {
     private BigDecimal valorEmprestimo;
 
     @Column(name = "numero_parcelas", nullable = false)
-    private BigDecimal numeroParcelas;
+    private Integer numeroParcelas;
 
     @Column(name = "status_pagamento", nullable = false)
     private StatusPagamento statusPagamento;
 
     @Column(name = "data_criacao", nullable = false)
     private LocalDate dataCriacao;
+
+    @PrePersist
+    public void inicializarParametrosIniciais() {
+        this.dataCriacao = LocalDate.now();
+    }
 }
