@@ -26,6 +26,22 @@ services:
     networks:
       - emprestimo-network
 
+  emprestimo_amqp:
+    image: rabbitmq:3.8.3-management
+    container_name: emprestimo_amqp
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - "RABBITMQ_ERLANG_COOKIE=secret_pass"
+      - "RABBITMQ_DEFAULT_USER=admin"
+      - "RABBITMQ_DEFAULT_PASS=admin"
+    networks:
+      - emprestimo-network
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+
 networks:
   emprestimo-network:
     name: emprestimo-network

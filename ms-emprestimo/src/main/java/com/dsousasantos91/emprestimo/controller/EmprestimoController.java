@@ -44,8 +44,24 @@ public class EmprestimoController {
             @ApiResponse(responseCode = "500", description = "Falha no servidor.")
     })
     @PostMapping
-    public ResponseEntity<EmprestimoResponse> solicitar(@Valid @RequestBody EmprestimoRequest request, HttpServletResponse servletResponse) {
-        EmprestimoResponse response = this.emprestimoService.solicitar(request);
+    public ResponseEntity<EmprestimoResponse> solicitar(@Valid @RequestBody EmprestimoRequest request,
+                                                        HttpServletResponse servletResponse) {
+        EmprestimoResponse response = this.emprestimoService.solicitar(request, Boolean.FALSE);
+        publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @Operation(summary = "Solicitar emprestimo async.", description = "Solicitar um emprestimo async considerando os limites para o tipo de identificador")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Solicitação realizada com sucesso."),
+            @ApiResponse(responseCode = "400", description = "Erro na requisição."),
+            @ApiResponse(responseCode = "404", description = "Recurso não encontrado."),
+            @ApiResponse(responseCode = "500", description = "Falha no servidor.")
+    })
+    @PostMapping(path = "/async")
+    public ResponseEntity<EmprestimoResponse> solicitarAsync(@Valid @RequestBody EmprestimoRequest request,
+                                                        HttpServletResponse servletResponse) {
+        EmprestimoResponse response = this.emprestimoService.solicitar(request, Boolean.TRUE);
         publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

@@ -10,6 +10,7 @@ import com.dsousasantos91.emprestimo.exception.GenericBadRequestException;
 import com.dsousasantos91.emprestimo.exception.GenericNotFoundException;
 import com.dsousasantos91.emprestimo.feign.PagamentoServiceClient;
 import com.dsousasantos91.emprestimo.mapper.EmprestimoMapper;
+import com.dsousasantos91.emprestimo.producer.EmprestimoProducer;
 import com.dsousasantos91.emprestimo.repository.EmprestimoRepository;
 import com.dsousasantos91.emprestimo.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -29,8 +29,9 @@ public class EmprestimoService {
     private final PessoaRepository pessoaRepository;
     private final EmprestimoMapper emprestimoMapper;
     private final PagamentoServiceClient pagamentoServiceClient;
+    private final EmprestimoProducer emprestimoProducer;
 
-    public EmprestimoResponse solicitar(EmprestimoRequest request) {
+    public EmprestimoResponse solicitar(EmprestimoRequest request, Boolean async) {
         log.info("Solicitar emprestimo para pessoa {}", request.getIdentificador());
         Pessoa pessoa = this.pessoaRepository.findByIdentificador(request.getIdentificador())
                 .orElseThrow(() -> new GenericNotFoundException("Pessoa com identificador [" + request.getIdentificador() + "] não encontrada"));
@@ -43,9 +44,16 @@ public class EmprestimoService {
                 .statusPagamento(StatusPagamento.PROCESSANDO)
                 .build();
         Emprestimo emprestimoRegistrado = this.emprestimoRepository.save(emprestimo);
-        EmprestimoResponse emprestimoPago = pagamentoServiceClient.pagarEmprestimo(emprestimoRegistrado.getId());
+        EmprestimoResponse emprestimoResponse = new EmprestimoResponse();
+        if (async) {
+            emprestimoResponse = this.emprestimoMapper.toResponse(emprestimoRegistrado);
+            this.emprestimoProducer.enviarEmprestimoParaPagamento(emprestimoResponse.getId());
+        }
+        if (!async) {
+            emprestimoResponse = pagamentoServiceClient.pagarEmprestimo(emprestimoRegistrado.getId());
+        }
         log.info("Pessoa {} solicitou o emprestimo de ID: [{}] com sucesso", emprestimoRegistrado.getPessoa().getNome(), emprestimoRegistrado.getId());
-        return emprestimoPago;
+        return emprestimoResponse;
     }
 
     private void validarValorSolicitado(TipoIdentificador tipoIdentificador, BigDecimal valorEmprestimo) {
