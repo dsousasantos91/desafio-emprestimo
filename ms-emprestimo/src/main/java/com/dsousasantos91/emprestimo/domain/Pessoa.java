@@ -1,15 +1,16 @@
 package com.dsousasantos91.emprestimo.domain;
 
 import com.dsousasantos91.emprestimo.domain.enumeration.TipoIdentificador;
+import com.dsousasantos91.emprestimo.util.annotations.Identificador;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,8 +39,8 @@ public class Pessoa {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Size(min = 11, max = 11)
-    @Pattern(regexp = "(^\\d{14}$)", message = "Enviar apenas números para {0}")
+    @Size(min = 8, max = 14)
+    @Identificador
     @Column(name = "identificador", nullable = false)
     private String identificador;
 
@@ -50,7 +51,7 @@ public class Pessoa {
     private TipoIdentificador tipoIdentificador;
 
     @Column(name = "valor_min_mensal", nullable = false)
-    private BigDecimal valorMinMensalParcela;
+    private BigDecimal valorMinMensal;
 
     @Column(name = "valor_max_emprestimo", nullable = false)
     private BigDecimal valorMaxEmprestimo;
