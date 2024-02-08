@@ -21,6 +21,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 @Slf4j
 @Service
@@ -37,6 +40,7 @@ public class EmprestimoService {
         Pessoa pessoa = this.pessoaRepository.findByIdentificador(request.getIdentificador())
                 .orElseThrow(() -> new GenericNotFoundException("Pessoa com identificador [" + request.getIdentificador() + "] não encontrada"));
         this.validarValorSolicitado(pessoa.getTipoIdentificador(), request.getValorEmprestimo());
+        this.validarLimiteDisponivel(pessoa, request.getValorEmprestimo());
         this.validarValorParcela(pessoa.getTipoIdentificador(), request);
         Emprestimo emprestimo = Emprestimo.builder()
                 .pessoa(pessoa)
@@ -55,6 +59,16 @@ public class EmprestimoService {
         }
         log.info("Pessoa {} solicitou o emprestimo de ID: [{}] com sucesso", emprestimoRegistrado.getPessoa().getNome(), emprestimoRegistrado.getId());
         return emprestimoResponse;
+    }
+
+    private void validarLimiteDisponivel(Pessoa pessoa, BigDecimal valorEmprestimo) {
+        List<Emprestimo> emprestimos = this.emprestimoRepository.findByPessoaId(pessoa.getId()).orElse(emptyList());
+        BigDecimal valorTotalDeEmprestimos = emprestimos.stream().map(Emprestimo::getValorEmprestimo).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal valorDisponivel = pessoa.getTipoIdentificador().getValorMaxEmprestimo().subtract(valorTotalDeEmprestimos);
+        if (valorDisponivel.compareTo(valorEmprestimo) < 0) {
+            throw new GenericBadRequestException("O valor solicitado [" + valorEmprestimo + "] " +
+                    "é maior que o valor disponível [" + valorDisponivel + "] para a pessoa com identificador [" + pessoa.getIdentificador() + "].");
+        }
     }
 
     private void validarValorSolicitado(TipoIdentificador tipoIdentificador, BigDecimal valorEmprestimo) {

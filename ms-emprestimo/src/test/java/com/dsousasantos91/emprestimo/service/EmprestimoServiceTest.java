@@ -106,6 +106,24 @@ class EmprestimoServiceTest {
     }
 
     @Test
+    void deveValidarLimiteDisponivelAoSolicitarEmprestimo() {
+        request.setValorEmprestimo(BigDecimal.valueOf(3001));
+        Emprestimo emprestimo2 = EmprestimoMock.mocked().withId(2L).withValorEmprestimo(BigDecimal.valueOf(2000)).mock();
+        List<Emprestimo> emprestimos = Arrays.asList(emprestimo, emprestimo2);
+        BigDecimal valorTotalDeEmprestimos = emprestimos.stream().map(Emprestimo::getValorEmprestimo).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal valorDisponivel = emprestimo.getPessoa().getTipoIdentificador().getValorMaxEmprestimo().subtract(valorTotalDeEmprestimos);
+
+        when(pessoaRepository.findByIdentificador(anyString())).thenReturn(Optional.of(emprestimo.getPessoa()));
+        when(emprestimoRepository.save(any())).thenReturn(emprestimo);
+        when(emprestimoRepository.findByPessoaId(anyLong())).thenReturn(Optional.of(emprestimos));
+        when(pagamentoServiceClient.pagarEmprestimo(anyLong())).thenReturn(response);
+
+        GenericBadRequestException exception = assertThrows(GenericBadRequestException.class, () -> emprestimoService.solicitar(request, Boolean.FALSE));
+        assertEquals(exception.getMessage(), "O valor solicitado [" + request.getValorEmprestimo() + "] " +
+                "é maior que o valor disponível [" + valorDisponivel + "] para a pessoa com identificador [" + emprestimo.getPessoa().getIdentificador() + "].");
+    }
+
+    @Test
     void deveValidarValorEmprestimoSolicitadoMaiorQueOPermitidoParaOTipoIdentificador() {
         when(pessoaRepository.findByIdentificador(anyString())).thenReturn(Optional.of(emprestimo.getPessoa()));
         when(emprestimoRepository.save(any())).thenReturn(emprestimo);
