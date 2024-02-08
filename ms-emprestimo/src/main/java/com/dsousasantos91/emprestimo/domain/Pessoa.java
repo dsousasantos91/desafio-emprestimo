@@ -55,4 +55,12 @@ public class Pessoa {
 
     @Column(name = "valor_max_emprestimo", nullable = false)
     private BigDecimal valorMaxEmprestimo;
+
+
+    @PrePersist
+    public void inicializarParametrosIniciais() {
+        this.tipoIdentificador = TipoIdentificador.resolverTipoIdentificador(this.identificador);
+        this.valorMinMensal = this.tipoIdentificador.getValorMinMensal();
+        this.valorMaxEmprestimo = this.tipoIdentificador.getValorMaxEmprestimo();
+    }
 }
