@@ -1,5 +1,7 @@
 package com.dsousasantos91.emprestimo.util.validadores;
 
+import com.dsousasantos91.emprestimo.exception.GenericBadRequestException;
+
 public class ValidadorCNPJ {
 
     public static boolean isValid(String cnpj) {
@@ -27,7 +29,7 @@ public class ValidadorCNPJ {
             digito1 = 0;
         }
         if (Integer.parseInt(cnpj.substring(12, 13)) != digito1) {
-            return false;
+            throw new GenericBadRequestException("CNPJ inválido");
         }
 
         soma = 0;
@@ -44,7 +46,7 @@ public class ValidadorCNPJ {
             digito2 = 0;
         }
         if (Integer.parseInt(cnpj.substring(13)) != digito2) {
-            return false;
+            throw new GenericBadRequestException("CNPJ inválido");
         }
 
         return true;

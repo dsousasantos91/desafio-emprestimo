@@ -1,5 +1,7 @@
 package com.dsousasantos91.emprestimo.util.validadores;
 
+import com.dsousasantos91.emprestimo.exception.GenericBadRequestException;
+
 public class ValidadorAP {
 
     public static boolean isValid(String identificador) {
@@ -11,6 +13,9 @@ public class ValidadorAP {
 
         String digitosSemUltimo = identificador.substring(0, 9);
         char ultimoDigito = identificador.charAt(9);
-        return digitosSemUltimo.indexOf(ultimoDigito) == -1;
+        if (digitosSemUltimo.indexOf(ultimoDigito) != -1) {
+            throw new GenericBadRequestException("Identificador de aposentado inválido. O ultimo digito não pode se repetir.");
+        }
+        return true;
     }
 }

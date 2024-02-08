@@ -1,5 +1,7 @@
 package com.dsousasantos91.emprestimo.util.validadores;
 
+import com.dsousasantos91.emprestimo.exception.GenericBadRequestException;
+
 public class ValidadorCPF {
 
     public static boolean isValid(String cpf) {
@@ -22,7 +24,7 @@ public class ValidadorCPF {
             digito1 = 0;
         }
         if (Integer.parseInt(cpf.substring(9, 10)) != digito1) {
-            return false;
+            throw new GenericBadRequestException("CPF inválido");
         }
 
         soma = 0;
@@ -34,7 +36,7 @@ public class ValidadorCPF {
             digito2 = 0;
         }
         if (Integer.parseInt(cpf.substring(10)) != digito2) {
-            return false;
+            throw new GenericBadRequestException("CPF inválido");
         }
 
         return true;
