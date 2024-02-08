@@ -9,6 +9,6 @@ public class GenericBadRequestException extends RuntimeException {
     }
 
     public GenericBadRequestException(String message) {
-        super(MESSAGE + ": " + message);
+        super(message);
     }
 }

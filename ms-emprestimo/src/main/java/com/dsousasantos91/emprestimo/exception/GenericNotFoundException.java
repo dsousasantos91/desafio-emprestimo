@@ -9,6 +9,6 @@ public class GenericNotFoundException extends RuntimeException {
     }
 
     public GenericNotFoundException(String message) {
-        super(MESSAGE + ": " + message);
+        super(message);
     }
 }

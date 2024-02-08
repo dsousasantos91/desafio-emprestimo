@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Slf4j
 @Service
@@ -63,7 +64,7 @@ public class EmprestimoService {
     }
 
     private void validarValorParcela(TipoIdentificador tipoIdentificador, EmprestimoRequest request) {
-        BigDecimal valorParcela = request.getValorEmprestimo().divide(BigDecimal.valueOf(request.getNumeroParcelas()));
+        BigDecimal valorParcela = request.getValorEmprestimo().divide(BigDecimal.valueOf(request.getNumeroParcelas()), RoundingMode.HALF_EVEN);
         if (valorParcela.compareTo(tipoIdentificador.getValorMinMensal()) < 0)
             throw new GenericBadRequestException("O valor da parcela [" + valorParcela + "] " +
                     "é menor que a parcela permitida [" + tipoIdentificador.getValorMinMensal() + "] para o tipo de identificador [" + tipoIdentificador.name() + "].");
