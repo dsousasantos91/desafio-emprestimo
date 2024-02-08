@@ -2,8 +2,10 @@ package com.dsousasantos91.emprestimo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableFeignClients
 public class MsEmprestimoApplication {
 
 	public static void main(String[] args) {

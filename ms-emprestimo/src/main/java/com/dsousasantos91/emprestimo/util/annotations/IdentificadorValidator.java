@@ -4,8 +4,8 @@ import com.dsousasantos91.emprestimo.util.validadores.ValidadorAP;
 import com.dsousasantos91.emprestimo.util.validadores.ValidadorCNPJ;
 import com.dsousasantos91.emprestimo.util.validadores.ValidadorCPF;
 import com.dsousasantos91.emprestimo.util.validadores.ValidadorEU;
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
