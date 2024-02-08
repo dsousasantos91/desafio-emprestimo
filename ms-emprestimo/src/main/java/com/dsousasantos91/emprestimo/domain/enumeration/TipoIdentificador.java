@@ -10,7 +10,7 @@ public enum TipoIdentificador {
 
     PF(BigDecimal.valueOf(300.0), BigDecimal.valueOf(10000.0), 11),
     PJ(BigDecimal.valueOf(1000.0), BigDecimal.valueOf(100000.0), 14),
-    AU(BigDecimal.valueOf(100.0), BigDecimal.valueOf(10000.0), 8),
+    EU(BigDecimal.valueOf(100.0), BigDecimal.valueOf(10000.0), 8),
     AP(BigDecimal.valueOf(400.0), BigDecimal.valueOf(25000.0), 10);
 
     private final BigDecimal valorMinMensal;
