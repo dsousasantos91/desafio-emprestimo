@@ -8,6 +8,7 @@ import com.dsousasantos91.emprestimo.domain.enumeration.StatusPagamento;
 import com.dsousasantos91.emprestimo.domain.enumeration.TipoIdentificador;
 import com.dsousasantos91.emprestimo.exception.GenericBadRequestException;
 import com.dsousasantos91.emprestimo.exception.GenericNotFoundException;
+import com.dsousasantos91.emprestimo.feign.PagamentoServiceClient;
 import com.dsousasantos91.emprestimo.mapper.EmprestimoMapper;
 import com.dsousasantos91.emprestimo.repository.EmprestimoRepository;
 import com.dsousasantos91.emprestimo.repository.PessoaRepository;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -26,6 +28,7 @@ public class EmprestimoService {
     private final EmprestimoRepository emprestimoRepository;
     private final PessoaRepository pessoaRepository;
     private final EmprestimoMapper emprestimoMapper;
+    private final PagamentoServiceClient pagamentoServiceClient;
 
     public EmprestimoResponse solicitar(EmprestimoRequest request) {
         log.info("Solicitar emprestimo para pessoa {}", request.getIdentificador());
@@ -40,8 +43,9 @@ public class EmprestimoService {
                 .statusPagamento(StatusPagamento.PROCESSANDO)
                 .build();
         Emprestimo emprestimoRegistrado = this.emprestimoRepository.save(emprestimo);
+        EmprestimoResponse emprestimoPago = pagamentoServiceClient.pagarEmprestimo(emprestimoRegistrado.getId());
         log.info("Pessoa {} solicitou o emprestimo de ID: [{}] com sucesso", emprestimoRegistrado.getPessoa().getNome(), emprestimoRegistrado.getId());
-        return this.emprestimoMapper.toResponse(emprestimoRegistrado);
+        return emprestimoPago;
     }
 
     private void validarValorSolicitado(TipoIdentificador tipoIdentificador, BigDecimal valorEmprestimo) {

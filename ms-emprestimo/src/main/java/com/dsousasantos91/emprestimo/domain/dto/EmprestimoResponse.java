@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class EmprestimoResponse {
     private Long id;
-    private PessoaResponse pessoa;
+    private Long idPessoa;
     private BigDecimal valorEmprestimo;
     private Integer numeroParcelas;
     private StatusPagamento statusPagamento;

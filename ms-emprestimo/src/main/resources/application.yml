@@ -17,3 +17,6 @@ spring:
     port: ${RABBIT_PORT:5672}
     username: ${RABBITMQ_USER:admin}
     virtual-host: ${RABBIT_VHOST:/}
+
+pagamento-service:
+    url: ${MS_PAGAMENTO_SERVICE:http://localhost:8081/api/v1/pagamento}
