@@ -34,7 +34,7 @@ public class Pessoa {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {2} e máximo de {1} caracteres para o campo {0}")
     @NotBlank(message = "{0} é obrigatório")
     @Column(name = "nome", nullable = false)
     private String nome;
