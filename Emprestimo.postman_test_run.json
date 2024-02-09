@@ -1,0 +1,2573 @@
+{
+	"id": "4113af0c-8369-416e-b451-2c47f0c1bfda",
+	"name": "Emprestimo",
+	"timestamp": "2024-02-09T15:29:32.496Z",
+	"collection_id": "28731792-a68912a7-50d2-44a3-9e0a-76e8c54ed340",
+	"folder_id": 0,
+	"environment_id": "28731792-fed63216-e976-4a81-9c9a-bd851f06515d",
+	"totalPass": 699,
+	"delay": "1000",
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-02-09T15:24:18.981Z",
+	"totalFail": 31,
+	"results": [
+		{
+			"id": "977e9e93-d403-4b35-a8b3-1b4768e180f5",
+			"name": "Cadastrar Pessoa",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 30,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				19,
+				17,
+				17,
+				16,
+				15,
+				15,
+				14,
+				15,
+				15,
+				30
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				}
+			]
+		},
+		{
+			"id": "954cee59-4883-4233-b6ce-2ff8f14026c0",
+			"name": "Buscar Todas Pessoas",
+			"url": "http://localhost:8080/api/v1/pessoa?size=2&page=0",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar o tamanho do array de elementos": true,
+				"Deve verificar a pagina apresentada": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar o tamanho do array de elementos": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar a pagina apresentada": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				10,
+				11,
+				10,
+				17,
+				9,
+				10,
+				11,
+				17,
+				11,
+				18
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				}
+			]
+		},
+		{
+			"id": "4926f2a6-0d29-42a5-b0d3-1d114c21b807",
+			"name": "Buscar Pessoa por ID",
+			"url": "http://localhost:8080/api/v1/pessoa/478",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar id preenchido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				9,
+				8,
+				10,
+				8,
+				9,
+				10,
+				8,
+				14,
+				10,
+				12
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				}
+			]
+		},
+		{
+			"id": "bd6cb938-7f8b-4003-ab3d-e8bc5e6b6fee",
+			"name": "Atualizar Pessoa por ID",
+			"url": "http://localhost:8080/api/v1/pessoa/478",
+			"time": 29,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar id preenchido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				13,
+				27,
+				17,
+				13,
+				15,
+				16,
+				18,
+				17,
+				16,
+				29
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true
+				}
+			]
+		},
+		{
+			"id": "4e28975e-9d7f-454c-9014-d7ad968cd235",
+			"name": "Apagar Pessoa por ID",
+			"url": "http://localhost:8080/api/v1/pessoa/478",
+			"time": 17,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Deve retornar status code 204": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 204": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				14,
+				12,
+				62,
+				12,
+				18,
+				14,
+				9,
+				21,
+				39,
+				17
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				}
+			]
+		},
+		{
+			"id": "d32fc5c7-107d-410e-8855-df81c0ff3d3b",
+			"name": "Cadastrar Pessoa",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 11,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				16,
+				15,
+				91,
+				13,
+				190,
+				12,
+				16,
+				14,
+				14,
+				11
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				}
+			]
+		},
+		{
+			"id": "cd55550f-1e19-4db3-8d96-0b51e0898b62",
+			"name": "Solicitar Empréstimo",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 39,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true,
+				"Deve verificar status PAGO": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar status PAGO": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				39,
+				35,
+				29,
+				28,
+				52,
+				31,
+				26,
+				32,
+				25,
+				39
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				}
+			]
+		},
+		{
+			"id": "531230fe-d46a-413e-85d8-1734b4be04f5",
+			"name": "Solicitar Empréstimo Async",
+			"url": "http://localhost:8080/api/v1/emprestimo/async",
+			"time": 27,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true,
+				"Deve verificar status PROCESSANDO": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar status PROCESSANDO": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				14,
+				18,
+				29,
+				14,
+				24,
+				17,
+				18,
+				18,
+				33,
+				27
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PROCESSANDO": true
+				}
+			]
+		},
+		{
+			"id": "5fbe160b-fbfe-428c-b5a7-b52ebb67eba3",
+			"name": "Buscar Todos Emprestimos",
+			"url": "http://localhost:8080/api/v1/emprestimo?size=1&page=0",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar o tamanho do array de elementos": true,
+				"Deve verificar a pagina apresentada": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar o tamanho do array de elementos": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar a pagina apresentada": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				11,
+				10,
+				12,
+				10,
+				20,
+				13,
+				16,
+				29,
+				12,
+				9
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar o tamanho do array de elementos": true,
+					"Deve verificar a pagina apresentada": true
+				}
+			]
+		},
+		{
+			"id": "0b1aabff-2cc9-481a-a201-ab9da20a4d76",
+			"name": "Buscar Emprestimo por ID",
+			"url": "http://localhost:8080/api/v1/emprestimo/212",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar id preenchido": true,
+				"Deve verificar status PAGO": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar status PAGO": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				8,
+				9,
+				9,
+				8,
+				17,
+				9,
+				7,
+				10,
+				18,
+				13
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar status PAGO": true
+				}
+			]
+		},
+		{
+			"id": "cc6cbdd4-621d-44ab-9a90-60e164cd7261",
+			"name": "Pessoa Tamanho Identificador",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 3,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem identificador inválido": true,
+				"Deve validar tamanho identificador": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem identificador inválido": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar tamanho identificador": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				3,
+				4,
+				3,
+				3,
+				6,
+				4,
+				3,
+				3,
+				3,
+				3
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inválido": true,
+					"Deve validar tamanho identificador": true
+				}
+			]
+		},
+		{
+			"id": "4bf47254-a736-4694-bcf4-71f723a067a8",
+			"name": "Pessoa CPF Válido",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 17,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true,
+				"Deve verificar se o tipoIdentificador é igual PF": true,
+				"Deve verificar se o valorMinMensal é igual 300.0": true,
+				"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar se o tipoIdentificador é igual PF": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar se o valorMinMensal é igual 300.0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o valorMaxEmprestimo é igual 10000.0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17,
+				17,
+				14,
+				20,
+				23,
+				14,
+				15,
+				22,
+				20,
+				17
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PF": true,
+					"Deve verificar se o valorMinMensal é igual 300.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				}
+			]
+		},
+		{
+			"id": "491693df-6ae4-4ae3-9669-60288e95c93f",
+			"name": "Pessoa CPF Inválido",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 6,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem 'CPF inválido'": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem 'CPF inválido'": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				4,
+				4,
+				4,
+				5,
+				5,
+				5,
+				10,
+				10,
+				7,
+				6
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				}
+			]
+		},
+		{
+			"id": "96aa017b-6b45-49b2-94f8-21c26a620512",
+			"name": "Pessoa CNPJ Válido",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 16,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true,
+				"Deve verificar se o tipoIdentificador é igual PJ": true,
+				"Deve verificar se o valorMinMensal é igual 1000.0": true,
+				"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar se o tipoIdentificador é igual PJ": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar se o valorMinMensal é igual 1000.0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o valorMaxEmprestimo é igual 100000.0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16,
+				13,
+				40,
+				13,
+				18,
+				16,
+				15,
+				16,
+				23,
+				16
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual PJ": true,
+					"Deve verificar se o valorMinMensal é igual 1000.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 100000.0": true
+				}
+			]
+		},
+		{
+			"id": "52c8bfe1-2f52-4436-a788-3a4e5f6d514d",
+			"name": "Pessoa CNPJ Inválido",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem 'CNPJ inválido'": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem 'CNPJ inválido'": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				4,
+				4,
+				3,
+				4,
+				5,
+				4,
+				5,
+				5,
+				4,
+				7
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				}
+			]
+		},
+		{
+			"id": "83e7c858-de4f-4805-9fd5-958f5b36317e",
+			"name": "Pessoa EU Válido",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 27,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true,
+				"Deve verificar se o tipoIdentificador é igual EU": true,
+				"Deve verificar se o valorMinMensal é igual 100.0": true,
+				"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar se o tipoIdentificador é igual EU": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar se o valorMinMensal é igual 100.0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o valorMaxEmprestimo é igual 10000.0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14,
+				15,
+				17,
+				12,
+				16,
+				14,
+				18,
+				17,
+				21,
+				27
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual EU": true,
+					"Deve verificar se o valorMinMensal é igual 100.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 10000.0": true
+				}
+			]
+		},
+		{
+			"id": "f6e608db-69ff-48f6-ba5d-67c7ee9b6ef7",
+			"name": "Pessoa EU Inválido",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem 'EU inválido'": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem 'EU inválido'": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				8,
+				4,
+				4,
+				4,
+				5,
+				5,
+				5,
+				4,
+				4,
+				7
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				}
+			]
+		},
+		{
+			"id": "2e12f2f9-9336-4305-a56e-b802f4614993",
+			"name": "Pessoa AP Válido",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 22,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true,
+				"Deve verificar se o tipoIdentificador é igual AP": true,
+				"Deve verificar se o valorMinMensal é igual 400.0": true,
+				"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar se o tipoIdentificador é igual AP": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve verificar se o valorMinMensal é igual 400.0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o valorMaxEmprestimo é igual 25000.0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12,
+				18,
+				14,
+				16,
+				20,
+				30,
+				20,
+				21,
+				18,
+				22
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o tipoIdentificador é igual AP": true,
+					"Deve verificar se o valorMinMensal é igual 400.0": true,
+					"Deve verificar se o valorMaxEmprestimo é igual 25000.0": true
+				}
+			]
+		},
+		{
+			"id": "deaa8e65-96cd-4784-99a3-8838d6a8e10a",
+			"name": "Pessoa AP Inválido",
+			"url": "http://localhost:8080/api/v1/pessoa",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem 'AP inválido'": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem 'AP inválido'": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				3,
+				3,
+				3,
+				4,
+				4,
+				40,
+				4,
+				5,
+				3,
+				7
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				}
+			]
+		},
+		{
+			"id": "10489982-b9a4-4e59-bb6a-dab33cb97aca",
+			"name": "Solicitar Empréstimo Identificador Inexistente",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem identificador inexistente": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem identificador inexistente": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				6,
+				6,
+				6,
+				6,
+				15,
+				8,
+				6,
+				6,
+				7,
+				7
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem identificador inexistente": true
+				}
+			]
+		},
+		{
+			"id": "1768d7ed-39ce-4efb-9ac8-901b3447ab34",
+			"name": "Solicitar Empréstimo CPF inválido",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 3,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem 'CPF inválido'": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem 'CPF inválido'": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				3,
+				4,
+				12,
+				3,
+				5,
+				4,
+				3,
+				4,
+				4,
+				3
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CPF inválido'": true
+				}
+			]
+		},
+		{
+			"id": "8599cd70-50b1-44a1-b6ee-6023ab9a6b72",
+			"name": "Solicitar Empréstimo CNPJ inválido",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem 'CNPJ inválido'": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem 'CNPJ inválido'": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				4,
+				3,
+				28,
+				6,
+				4,
+				5,
+				4,
+				3,
+				3,
+				4
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'CNPJ inválido'": true
+				}
+			]
+		},
+		{
+			"id": "f35d7784-e2cd-4344-95fe-3d974ffbe7b1",
+			"name": "Solicitar Empréstimo EU inválido",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem 'EU inválido'": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem 'EU inválido'": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				3,
+				3,
+				4,
+				3,
+				5,
+				5,
+				4,
+				4,
+				3,
+				4
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'EU inválido'": true
+				}
+			]
+		},
+		{
+			"id": "8917ac2f-dc1c-427e-bc63-863cde59fae7",
+			"name": "Solicitar Empréstimo AP inválido",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem 'AP inválido'": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem 'AP inválido'": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				3,
+				3,
+				3,
+				4,
+				5,
+				5,
+				13,
+				6,
+				3,
+				4
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem 'AP inválido'": true
+				}
+			]
+		},
+		{
+			"id": "5594d6c4-e4eb-4186-95a6-260da01f654b",
+			"name": "Solicitar Empréstimo Limite Maior que o Permitido",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 53,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 400": false,
+				"Deve validar mensagem limite excedido": false
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 4,
+					"fail": 6
+				},
+				"Deve validar mensagem limite excedido": {
+					"pass": 3,
+					"fail": 7
+				}
+			},
+			"times": [
+				6,
+				21,
+				6,
+				27,
+				31,
+				3,
+				22,
+				27,
+				5,
+				53
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				}
+			]
+		},
+		{
+			"id": "9420fee3-05e8-4759-a90e-4a3626b489ba",
+			"name": "Solicitar Empréstimo Limite Indiponível",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 29,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 400": false,
+				"Deve validar mensagem limite excedido": false
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 2,
+					"fail": 8
+				},
+				"Deve validar mensagem limite excedido": {
+					"pass": 1,
+					"fail": 9
+				}
+			},
+			"times": [
+				7,
+				31,
+				28,
+				30,
+				82,
+				3,
+				29,
+				24,
+				26,
+				29
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": false,
+					"Deve validar mensagem limite excedido": false
+				}
+			]
+		},
+		{
+			"id": "5fbb7147-cea8-4bdd-919c-b858999a60fb",
+			"name": "Solicitar Empréstimo Parcela Mínima Inválida PF",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 8,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem limite excedido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem limite excedido": {
+					"pass": 10,
+					"fail": 0
+				}
+			},
+			"times": [
+				10,
+				7,
+				10,
+				7,
+				9,
+				8,
+				8,
+				7,
+				56,
+				8
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				}
+			]
+		},
+		{
+			"id": "3901aa41-1837-4ab2-b64e-09a7ffc79952",
+			"name": "Solicitar Empréstimo Parcela Mínima Inválida PJ",
+			"url": "http://localhost:8080/api/v1/emprestimo",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Deve retornar status code 400": true,
+				"Deve validar mensagem limite excedido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 400": {
+					"pass": 10,
+					"fail": 0
+				},
+				"Deve validar mensagem limite excedido": {
+					"pass": 9,
+					"fail": 1
+				}
+			},
+			"times": [
+				45,
+				8,
+				8,
+				8,
+				3,
+				9,
+				7,
+				7,
+				35,
+				7
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": false
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				},
+				{
+					"Deve retornar status code 400": true,
+					"Deve validar mensagem limite excedido": true
+				}
+			]
+		}
+	],
+	"count": 10,
+	"totalTime": 4003,
+	"collection": {
+		"requests": [
+			{
+				"id": "977e9e93-d403-4b35-a8b3-1b4768e180f5",
+				"method": "POST"
+			},
+			{
+				"id": "954cee59-4883-4233-b6ce-2ff8f14026c0",
+				"method": "GET"
+			},
+			{
+				"id": "4926f2a6-0d29-42a5-b0d3-1d114c21b807",
+				"method": "GET"
+			},
+			{
+				"id": "bd6cb938-7f8b-4003-ab3d-e8bc5e6b6fee",
+				"method": "PUT"
+			},
+			{
+				"id": "4e28975e-9d7f-454c-9014-d7ad968cd235",
+				"method": "DELETE"
+			},
+			{
+				"id": "d32fc5c7-107d-410e-8855-df81c0ff3d3b",
+				"method": "POST"
+			},
+			{
+				"id": "cd55550f-1e19-4db3-8d96-0b51e0898b62",
+				"method": "POST"
+			},
+			{
+				"id": "531230fe-d46a-413e-85d8-1734b4be04f5",
+				"method": "POST"
+			},
+			{
+				"id": "5fbe160b-fbfe-428c-b5a7-b52ebb67eba3",
+				"method": "GET"
+			},
+			{
+				"id": "0b1aabff-2cc9-481a-a201-ab9da20a4d76",
+				"method": "GET"
+			},
+			{
+				"id": "cc6cbdd4-621d-44ab-9a90-60e164cd7261",
+				"method": "POST"
+			},
+			{
+				"id": "4bf47254-a736-4694-bcf4-71f723a067a8",
+				"method": "POST"
+			},
+			{
+				"id": "491693df-6ae4-4ae3-9669-60288e95c93f",
+				"method": "POST"
+			},
+			{
+				"id": "96aa017b-6b45-49b2-94f8-21c26a620512",
+				"method": "POST"
+			},
+			{
+				"id": "52c8bfe1-2f52-4436-a788-3a4e5f6d514d",
+				"method": "POST"
+			},
+			{
+				"id": "83e7c858-de4f-4805-9fd5-958f5b36317e",
+				"method": "POST"
+			},
+			{
+				"id": "f6e608db-69ff-48f6-ba5d-67c7ee9b6ef7",
+				"method": "POST"
+			},
+			{
+				"id": "2e12f2f9-9336-4305-a56e-b802f4614993",
+				"method": "POST"
+			},
+			{
+				"id": "deaa8e65-96cd-4784-99a3-8838d6a8e10a",
+				"method": "POST"
+			},
+			{
+				"id": "10489982-b9a4-4e59-bb6a-dab33cb97aca",
+				"method": "POST"
+			},
+			{
+				"id": "1768d7ed-39ce-4efb-9ac8-901b3447ab34",
+				"method": "POST"
+			},
+			{
+				"id": "8599cd70-50b1-44a1-b6ee-6023ab9a6b72",
+				"method": "POST"
+			},
+			{
+				"id": "f35d7784-e2cd-4344-95fe-3d974ffbe7b1",
+				"method": "POST"
+			},
+			{
+				"id": "8917ac2f-dc1c-427e-bc63-863cde59fae7",
+				"method": "POST"
+			},
+			{
+				"id": "5594d6c4-e4eb-4186-95a6-260da01f654b",
+				"method": "POST"
+			},
+			{
+				"id": "9420fee3-05e8-4759-a90e-4a3626b489ba",
+				"method": "POST"
+			},
+			{
+				"id": "5fbb7147-cea8-4bdd-919c-b858999a60fb",
+				"method": "POST"
+			},
+			{
+				"id": "3901aa41-1837-4ab2-b64e-09a7ffc79952",
+				"method": "POST"
+			}
+		]
+	}
+}
