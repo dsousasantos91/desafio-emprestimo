@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=pg_client
     ports:
-      - 5432:5432
+      - "5432:5432"
     networks:
       - emprestimo-network
 
@@ -41,6 +41,38 @@ services:
       - emprestimo-network
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+
+  ms-emprestimo:
+    image: dsousasantos91/ms-emprestimo:1.0.0
+    container_name: ms-emprestimo
+    restart: always
+    environment:
+      - "APP_PROFILE=prod"
+      - "MS_PAGAMENTO_SERVICE=http://ms-pagamento:8080/api/v1/pagamento"
+      - "RABBITMQ_HOST=emprestimo_amqp"
+      - "DATABASE_URL=jdbc:postgresql://emprestimodb:5432/postgres"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - emprestimodb
+      - emprestimo_amqp
+    networks:
+      - emprestimo-network
+
+  ms-pagamento:
+    image: dsousasantos91/ms-pagamento:1.0.0
+    container_name: ms-pagamento
+    restart: always
+    environment:
+      - "APP_PROFILE=prod"
+      - "RABBITMQ_HOST=emprestimo_amqp"
+      - "DATABASE_URL=jdbc:postgresql://emprestimodb:5432/postgres"
+    depends_on:
+      - emprestimodb
+      - emprestimo_amqp
+      - ms-emprestimo
+    networks:
+      - emprestimo-network
 
 networks:
   emprestimo-network:
