@@ -22,7 +22,7 @@ public class PessoaRequest {
     @NotBlank(message = "{0} é obrigatório")
     private String nome;
 
-    @Size(min = 8, max = 14)
+    @Size(min = 8, max = 14, message = "O tamanho do {0} deve ser entre 8 e 14")
     @Identificador
     private String identificador;
 

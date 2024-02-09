@@ -645,10 +645,10 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Deve validar tamanho identificador\", function () {\r",
-									"    let msgUsuario = \"tamanho deve ser entre 8 e 14\";\r",
+									"    let msgUsuario = \"O tamanho do identificador deve ser entre 8 e 14\";\r",
 									"    let msg = responseJson.find(_msg => _msg.messagemUsuario === msgUsuario)\r",
-									"    pm.expect(msg.messagemUsuario).to.eq(\"tamanho deve ser entre 8 e 14\");\r",
-									"    pm.expect(msg.messagemDesenvolvedor).to.eq(\"Field error in object 'pessoaRequest' on field 'identificador': rejected value [1234567]; codes [Size.pessoaRequest.identificador,Size.identificador,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [pessoaRequest.identificador,identificador]; arguments []; default message [identificador],14,8]; default message [tamanho deve ser entre 8 e 14]\");\r",
+									"    pm.expect(msg.messagemUsuario).to.eq(msgUsuario);\r",
+									"    pm.expect(msg.messagemDesenvolvedor).to.eq(\"Field error in object 'pessoaRequest' on field 'identificador': rejected value [1234567]; codes [Size.pessoaRequest.identificador,Size.identificador,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [pessoaRequest.identificador,identificador]; arguments []; default message [identificador],14,8]; default message [O tamanho do {0} deve ser entre 8 e 14]\");\r",
 									"});"
 								],
 								"type": "text/javascript"
