@@ -1,0 +1,2263 @@
+{
+	"info": {
+		"_postman_id": "a68912a7-50d2-44a3-9e0a-76e8c54ed340",
+		"name": "Emprestimo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28731792"
+	},
+	"item": [
+		{
+			"name": "CRUD Pessoa Sucesso",
+			"item": [
+				{
+					"name": "Cadastrar Pessoa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set('idPessoa', responseJson.id);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": gerarCpf(),\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Todas Pessoas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar o tamanho do array de elementos\", function () {\r",
+									"    pm.expect(responseJson.size).to.eq(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar a pagina apresentada\", function () {\r",
+									"    pm.expect(responseJson.number).to.eq(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa?size=2&page=0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Pessoa por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{idPessoa}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Pessoa por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let bodyPessoa = JSON.parse(pm.collectionVariables.get('bodyPessoa'));\r",
+									"\r",
+									"bodyPessoa.nome = \"Pessoa Atualizada [\" + gerarNumeroAleatorio(0, 9999) + \"]\";\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{idPessoa}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Pessoa por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deve retornar status code 204\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{idPessoa}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fluxo Empréstimo Sucesso",
+			"item": [
+				{
+					"name": "Cadastrar Pessoa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"let bodyEmprestimo = {\r",
+									"    \"identificador\": responseJson.identificador,\r",
+									"    \"valorEmprestimo\": gerarNumeroAleatorio(3000, 5000),\r",
+									"    \"numeroParcelas\": gerarNumeroAleatorio(1, 10)\r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyEmprestimo', JSON.stringify(bodyEmprestimo));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": gerarCpf(),\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar status PAGO\", function () {\r",
+									"    pm.expect(responseJson.statusPagamento).to.eq('PAGO');\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set('idEmprestimo', responseJson.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyEmprestimo}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo Async",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let bodyEmprestimo = JSON.parse(pm.collectionVariables.get('bodyEmprestimo'));\r",
+									"bodyEmprestimo.valorEmprestimo = gerarNumeroAleatorio(3000, 5000);\r",
+									"bodyEmprestimo.numeroParcelas = gerarNumeroAleatorio(1, 10);\r",
+									"\r",
+									"pm.collectionVariables.set('bodyEmprestimo', JSON.stringify(bodyEmprestimo));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar status PROCESSANDO\", function () {\r",
+									"    pm.expect(responseJson.statusPagamento).to.eq('PROCESSANDO');\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set('idEmprestimo', responseJson.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyEmprestimo}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo/async",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo",
+								"async"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Todos Emprestimos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar o tamanho do array de elementos\", function () {\r",
+									"    pm.expect(responseJson.size).to.eq(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar a pagina apresentada\", function () {\r",
+									"    pm.expect(responseJson.number).to.eq(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo?size=1&page=0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Emprestimo por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar status PAGO\", function () {\r",
+									"    pm.expect(responseJson.statusPagamento).to.eq('PAGO');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{idEmprestimo}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validações de Pessoa",
+			"item": [
+				{
+					"name": "Pessoa Tamanho Identificador",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem identificador inválido\", function () {\r",
+									"    let msgUsuario = \"Verifique o tipo de identificador inserido. Este campo deve conter apenas números\";\r",
+									"    let msg = responseJson.find(_msg => _msg.messagemUsuario === msgUsuario)\r",
+									"    pm.expect(msg.messagemUsuario).to.eq(msgUsuario);\r",
+									"    pm.expect(msg.messagemDesenvolvedor).to.eq(\"Field error in object 'pessoaRequest' on field 'identificador': rejected value [1234567]; codes [Identificador.pessoaRequest.identificador,Identificador.identificador,Identificador.java.lang.String,Identificador]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [pessoaRequest.identificador,identificador]; arguments []; default message [identificador]]; default message [Verifique o tipo de identificador inserido. Este campo deve conter apenas números]\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar tamanho identificador\", function () {\r",
+									"    let msgUsuario = \"tamanho deve ser entre 8 e 14\";\r",
+									"    let msg = responseJson.find(_msg => _msg.messagemUsuario === msgUsuario)\r",
+									"    pm.expect(msg.messagemUsuario).to.eq(\"tamanho deve ser entre 8 e 14\");\r",
+									"    pm.expect(msg.messagemDesenvolvedor).to.eq(\"Field error in object 'pessoaRequest' on field 'identificador': rejected value [1234567]; codes [Size.pessoaRequest.identificador,Size.identificador,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [pessoaRequest.identificador,identificador]; arguments []; default message [identificador],14,8]; default message [tamanho deve ser entre 8 e 14]\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": \"1234567\",\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa CPF Válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o tipoIdentificador é igual PF\", function () {\r",
+									"    pm.expect(responseJson.tipoIdentificador).to.eq('PF');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o valorMinMensal é igual 300.0\", function () {\r",
+									"    pm.expect(responseJson.valorMinMensal).to.eq(300.0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o valorMaxEmprestimo é igual 10000.0\", function () {\r",
+									"    pm.expect(responseJson.valorMaxEmprestimo).to.eq(10000.0);\r",
+									"});\r",
+									"\r",
+									"let bodyEmprestimo = {\r",
+									"    \"identificador\": responseJson.identificador,\r",
+									"    \"valorEmprestimo\": gerarNumeroAleatorio(3000, 5000),\r",
+									"    \"numeroParcelas\": gerarNumeroAleatorio(1, 10)\r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyEmprestimo', JSON.stringify(bodyEmprestimo));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": gerarCpf(),\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa CPF Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem 'CPF inválido'\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.eq('CPF inválido');\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.eq('GenericBadRequestException: CPF inválido');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": '12345678901',\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa CNPJ Válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o tipoIdentificador é igual PJ\", function () {\r",
+									"    pm.expect(responseJson.tipoIdentificador).to.eq('PJ');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o valorMinMensal é igual 1000.0\", function () {\r",
+									"    pm.expect(responseJson.valorMinMensal).to.eq(1000.0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o valorMaxEmprestimo é igual 100000.0\", function () {\r",
+									"    pm.expect(responseJson.valorMaxEmprestimo).to.eq(100000.0);\r",
+									"});\r",
+									"\r",
+									"let bodyEmprestimo = {\r",
+									"    \"identificador\": responseJson.identificador,\r",
+									"    \"valorEmprestimo\": gerarNumeroAleatorio(3000, 5000),\r",
+									"    \"numeroParcelas\": gerarNumeroAleatorio(1, 10)\r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyEmprestimo', JSON.stringify(bodyEmprestimo));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCnpj = eval(pm.collectionVariables.get('gerarCnpj'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": gerarCnpj(),\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa CNPJ Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem 'CNPJ inválido'\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.eq('CNPJ inválido');\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.eq('GenericBadRequestException: CNPJ inválido');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": '78926668000150',\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa EU Válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o tipoIdentificador é igual EU\", function () {\r",
+									"    pm.expect(responseJson.tipoIdentificador).to.eq('EU');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o valorMinMensal é igual 100.0\", function () {\r",
+									"    pm.expect(responseJson.valorMinMensal).to.eq(100.0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o valorMaxEmprestimo é igual 10000.0\", function () {\r",
+									"    pm.expect(responseJson.valorMaxEmprestimo).to.eq(10000.0);\r",
+									"});\r",
+									"\r",
+									"let bodyEmprestimo = {\r",
+									"    \"identificador\": responseJson.identificador,\r",
+									"    \"valorEmprestimo\": gerarNumeroAleatorio(3000, 5000),\r",
+									"    \"numeroParcelas\": gerarNumeroAleatorio(1, 10)\r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyEmprestimo', JSON.stringify(bodyEmprestimo));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function gerarEU () {\r",
+									"    let primeiroDigito = Math.floor(Math.random() * 10);\r",
+									"    let ultimoDigito = 9 - primeiroDigito;\r",
+									"    let numerosCentrais = Math.floor(Math.random() * 1000000);\r",
+									"    let numeroAleatorio = String(primeiroDigito) + String(numerosCentrais).padStart(6, '0') + String(ultimoDigito);\r",
+									"    return numeroAleatorio;\r",
+									"}\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": gerarEU(),\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa EU Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem 'EU inválido'\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.eq('Identificador de estudante universitário inválido. A soma do primeiro e último digito deve ser igual a 9.');\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.eq('GenericBadRequestException: Identificador de estudante universitário inválido. A soma do primeiro e último digito deve ser igual a 9.');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": '65806504',\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa AP Válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o tipoIdentificador é igual AP\", function () {\r",
+									"    pm.expect(responseJson.tipoIdentificador).to.eq('AP');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o valorMinMensal é igual 400.0\", function () {\r",
+									"    pm.expect(responseJson.valorMinMensal).to.eq(400.0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve verificar se o valorMaxEmprestimo é igual 25000.0\", function () {\r",
+									"    pm.expect(responseJson.valorMaxEmprestimo).to.eq(25000.0);\r",
+									"});\r",
+									"\r",
+									"let bodyEmprestimo = {\r",
+									"    \"identificador\": responseJson.identificador,\r",
+									"    \"valorEmprestimo\": gerarNumeroAleatorio(3000, 5000),\r",
+									"    \"numeroParcelas\": gerarNumeroAleatorio(1, 10)\r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyEmprestimo', JSON.stringify(bodyEmprestimo));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function gerarAP() {\r",
+									"    let primeiro9Digitos = '';\r",
+									"    for (let i = 0; i < 9; i++) {\r",
+									"        primeiro9Digitos += Math.floor(Math.random() * 10);\r",
+									"    }\r",
+									"    let ultimoDigito;\r",
+									"    do {\r",
+									"        ultimoDigito = Math.floor(Math.random() * 10);\r",
+									"    } while (primeiro9Digitos.includes(ultimoDigito.toString()));\r",
+									"    return primeiro9Digitos + ultimoDigito;\r",
+									"}\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": gerarAP(),\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pessoa AP Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem 'AP inválido'\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.eq('Identificador de aposentado inválido. O ultimo digito não pode se repetir.');\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.eq('GenericBadRequestException: Identificador de aposentado inválido. O ultimo digito não pode se repetir.');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"let bodyPessoa = {\r",
+									"    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"    \"identificador\": '1234567899',\r",
+									"    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('bodyPessoa', JSON.stringify(bodyPessoa))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{bodyPessoa}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validações de Empréstimo",
+			"item": [
+				{
+					"name": "Solicitar Empréstimo Identificador Inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem identificador inexistente\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.match(/Pessoa com identificador \\[\\d+\\] não encontrada/);\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.match(/GenericNotFoundException: Pessoa com identificador \\[\\d+\\] não encontrada/);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let cpf = gerarCpf();\r",
+									"\r",
+									"(async function() {\r",
+									"    const getPessoas = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(getPessoas, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        let result = response.json().content.filter(pessoa => pessoa.identificador === cpf);\r",
+									"        if (result.length === 0) {\r",
+									"            pm.collectionVariables.set('identificadorInexistente', cpf);\r",
+									"        }\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": {{identificadorInexistente}},\r\n    \"valorEmprestimo\": 5000,\r\n    \"numeroParcelas\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo CPF inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem 'CPF inválido'\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.eq('CPF inválido');\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.eq('GenericBadRequestException: CPF inválido');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let cpf = gerarCpf();\r",
+									"\r",
+									"(async function() {\r",
+									"    const getPessoas = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(getPessoas, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        let result = response.json().content.filter(pessoa => pessoa.identificador === cpf);\r",
+									"        if (result.length === 0) {\r",
+									"            pm.collectionVariables.set('identificadorInexistente', cpf);\r",
+									"        }\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": \"12345678901\",\r\n    \"valorEmprestimo\": 5000,\r\n    \"numeroParcelas\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo CNPJ inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem 'CNPJ inválido'\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.eq('CNPJ inválido');\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.eq('GenericBadRequestException: CNPJ inválido');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let cpf = gerarCpf();\r",
+									"\r",
+									"(async function() {\r",
+									"    const getPessoas = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(getPessoas, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        let result = response.json().content.filter(pessoa => pessoa.identificador === cpf);\r",
+									"        if (result.length === 0) {\r",
+									"            pm.collectionVariables.set('identificadorInexistente', cpf);\r",
+									"        }\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": \"78926668000150\",\r\n    \"valorEmprestimo\": 5000,\r\n    \"numeroParcelas\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo EU inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem 'EU inválido'\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.eq('Identificador de estudante universitário inválido. A soma do primeiro e último digito deve ser igual a 9.');\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.eq('GenericBadRequestException: Identificador de estudante universitário inválido. A soma do primeiro e último digito deve ser igual a 9.');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let cpf = gerarCpf();\r",
+									"\r",
+									"(async function() {\r",
+									"    const getPessoas = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(getPessoas, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        let result = response.json().content.filter(pessoa => pessoa.identificador === cpf);\r",
+									"        if (result.length === 0) {\r",
+									"            pm.collectionVariables.set('identificadorInexistente', cpf);\r",
+									"        }\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": \"65806504\",\r\n    \"valorEmprestimo\": 5000,\r\n    \"numeroParcelas\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo AP inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem 'AP inválido'\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.eq('Identificador de aposentado inválido. O ultimo digito não pode se repetir.');\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.eq('GenericBadRequestException: Identificador de aposentado inválido. O ultimo digito não pode se repetir.');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let cpf = gerarCpf();\r",
+									"\r",
+									"(async function() {\r",
+									"    const getPessoas = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(getPessoas, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        let result = response.json().content.filter(pessoa => pessoa.identificador === cpf);\r",
+									"        if (result.length === 0) {\r",
+									"            pm.collectionVariables.set('identificadorInexistente', cpf);\r",
+									"        }\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": \"1234567899\",\r\n    \"valorEmprestimo\": 5000,\r\n    \"numeroParcelas\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo Limite Maior que o Permitido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem limite excedido\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.match(/O valor solicitado \\[\\d+(\\.\\d+)?\\] é maior que o permitido \\[\\d+(\\.\\d+)?\\] para o tipo de identificador \\[(PF|PJ|EU|AP)\\]\\./);\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.match(/GenericBadRequestException: O valor solicitado \\[\\d+(\\.\\d+)?\\] é maior que o permitido \\[\\d+(\\.\\d+)?\\] para o tipo de identificador \\[(PF|PJ|EU|AP)\\]\\./);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let cpf = gerarCpf();\r",
+									"\r",
+									"(async function() {\r",
+									"    const getPessoas = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(getPessoas, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        let pessoas = response.json().content;\r",
+									"        let result = pessoas[gerarNumeroAleatorio(0, pessoas.length - 1)];\r",
+									"        pm.collectionVariables.set('identificador', result.identificador);\r",
+									"        pm.collectionVariables.set('limiteExcedido', result.valorMaxEmprestimo + result.valorMaxEmprestimo);\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": {{identificador}},\r\n    \"valorEmprestimo\": {{limiteExcedido}},\r\n    \"numeroParcelas\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo Limite Indiponível",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem limite excedido\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.match(/O valor solicitado \\[\\d+(\\.\\d+)?\\] é maior que o valor disponível \\[\\d+(\\.\\d+)?\\] para a pessoa com identificador \\[\\d+\\]./);\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.match(/GenericBadRequestException: O valor solicitado \\[\\d+(\\.\\d+)?\\] é maior que o valor disponível \\[\\d+(\\.\\d+)?\\] para a pessoa com identificador \\[\\d+\\]./);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let cpf = gerarCpf();\r",
+									"\r",
+									"function sendRequestAsync() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest(`${pm.environment.get('url')}/api/v1/emprestimo`, (error, response) => {\r",
+									"            if (error || response.code !== 200) {\r",
+									"                reject(error)\r",
+									"                pm.expect.fail('Could not load external library');\r",
+									"            } else {\r",
+									"                resolve(response)\r",
+									"            }\r",
+									"        });\r",
+									"    })\r",
+									"}\r",
+									"\r",
+									"(async function() {\r",
+									"    const response = await sendRequestAsync();\r",
+									"    let emprestimos = response.json().content;\r",
+									"    let result = emprestimos[gerarNumeroAleatorio(0, pessoas.length - 1)];\r",
+									"    console.log(result.idPessoa)\r",
+									"    const getPessoaPorId = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa/${result.idPessoa}`,\r",
+									"        method: 'GET',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(getPessoaPorId, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        let result = response.json();\r",
+									"        pm.collectionVariables.set('identificador', result.identificador);\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": {{identificador}},\r\n    \"valorEmprestimo\": 9999,\r\n    \"numeroParcelas\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo Parcela Mínima Inválida PF",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem limite excedido\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.match(/O valor da parcela \\[\\d+(\\.\\d+)?\\] é menor que a parcela permitida \\[\\d+(\\.\\d+)?\\] para o tipo de identificador \\[PF\\]\\./);\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.match(/GenericBadRequestException: O valor da parcela \\[\\d+(\\.\\d+)?\\] é menor que a parcela permitida \\[\\d+(\\.\\d+)?\\] para o tipo de identificador \\[PF\\]\\./);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let cpf = gerarCpf();\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"(async function() {\r",
+									"    const postRequest = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify(\r",
+									"                {\r",
+									"                    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"                    \"identificador\": gerarCpf(),\r",
+									"                    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"                }\r",
+									"            )\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(postRequest, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        pm.variables.set('identificador', response.json().identificador)\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": {{identificador}},\r\n    \"valorEmprestimo\": 3000,\r\n    \"numeroParcelas\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Solicitar Empréstimo Parcela Mínima Inválida PJ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 400\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve validar mensagem limite excedido\", function () {\r",
+									"    pm.expect(responseJson[0].messagemUsuario).to.match(/O valor da parcela \\[\\d+(\\.\\d+)?\\] é menor que a parcela permitida \\[\\d+(\\.\\d+)?\\] para o tipo de identificador \\[PJ\\]\\./);\r",
+									"    pm.expect(responseJson[0].messagemDesenvolvedor).to.match(/GenericBadRequestException: O valor da parcela \\[\\d+(\\.\\d+)?\\] é menor que a parcela permitida \\[\\d+(\\.\\d+)?\\] para o tipo de identificador \\[PJ\\]\\./);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarCnpj = eval(pm.collectionVariables.get('gerarCnpj'));\r",
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let cnpj = gerarCnpj();\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date();\r",
+									"let anoAtual = dataInicio.getFullYear();\r",
+									"dataInicio.setFullYear(anoAtual - 65);\r",
+									"dataFim.setFullYear(anoAtual - 18);\r",
+									"\r",
+									"let dataAleatoria = new Date();\r",
+									"dataAleatoria.setTime(dataInicio.getTime() - gerarNumeroAleatorio(dataFim.getTime(), dataInicio.getTime()))\r",
+									"let ano = dataAleatoria.getFullYear();\r",
+									"let mes = String(dataAleatoria.getMonth() + 1).padStart(2, '0');\r",
+									"let dia = String(dataAleatoria.getDate()).padStart(2, '0');\r",
+									"\r",
+									"(async function() {\r",
+									"    const postRequest = {\r",
+									"        url: `${pm.environment.get('url')}/api/v1/pessoa`,\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json',\r",
+									"            'X-Foo': 'bar'\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify(\r",
+									"                {\r",
+									"                    \"nome\": \"Pessoa Aleatoria [\" + gerarNumeroAleatorio(0, 9999) + \"]\",\r",
+									"                    \"identificador\": gerarCnpj(),\r",
+									"                    \"dataNascimento\": `${dia}/${mes}/${ano}` \r",
+									"                }\r",
+									"            )\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(postRequest, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"        pm.variables.set('identificador', response.json().identificador)\r",
+									"    });\r",
+									"})();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificador\": {{identificador}},\r\n    \"valorEmprestimo\": 10000,\r\n    \"numeroParcelas\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/emprestimo",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"emprestimo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "gerarCpf",
+			"value": "(function () {\n    const rnd = (n) => Math.round(Math.random() * n);\n    const mod = (base, div) => Math.round(base - Math.floor(base / div) * div);\n    const n = Array(9).fill('').map(() => rnd(9));\n    let d1 = n.reduce((total, number, index) => (total + (number * (10 - index))), 0);\n    d1 = 11 - mod(d1, 11);\n    if (d1 >= 10) d1 = 0;\n    let d2 = (d1 * 2) + n.reduce((total, number, index) => (total + (number * (11 - index))), 0);\n    d2 = 11 - mod(d2, 11);\n    if (d2 >= 10) d2 = 0;\n    return `${n.join('')}${d1}${d2}`;\n})",
+			"type": "string"
+		},
+		{
+			"key": "gerarNumeroAleatorio",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bodyPessoa",
+			"value": ""
+		},
+		{
+			"key": "idPessoa",
+			"value": ""
+		},
+		{
+			"key": "bodyEmprestimo",
+			"value": ""
+		},
+		{
+			"key": "idEmprestimo",
+			"value": ""
+		},
+		{
+			"key": "gerarCnpj",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "identificadorInexistente",
+			"value": ""
+		},
+		{
+			"key": "identificador",
+			"value": ""
+		},
+		{
+			"key": "limiteExcedido",
+			"value": ""
+		}
+	]
+}
