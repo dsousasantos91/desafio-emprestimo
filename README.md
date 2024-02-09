@@ -20,8 +20,8 @@
 - [Ideias para implementação](#ideias-para-implementação)
 
 
-**Autor**
---- 
+## Autor
+ 
 ### Douglas de Sousa Santos
 - [<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />](dsousasantos91@gmail.com)
 - [<img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />](https://github.com/dsousasantos91)
@@ -142,8 +142,8 @@ Para implementar o projeto, foram utilizadas as seguintes tecnologias e ferramen
 
 Essas tecnologias foram escolhidas com base em minha expertise além de sua maturidade, popularidade e capacidade de atender aos requisitos de desenvolvimento do projeto, proporcionando eficiência, escalabilidade e manutenibilidade.
 
-**Versionamento**
----
+## Versionamento
+
 A estratégia de versionamento usada foi Semantic Versioning (ou SemVer) que é um sistema de numeração de versões usado para indicar mudanças no código e na funcionalidade de um programa. Estabelece um padrão claro e consistente na forma como as versões são numeradas e como as alterações em um software são comunicadas aos desenvolvedores e usuários.
 
 O sistema de versionamento semântico é composto por três números principais, dispostos na seguinte ordem: "MAJOR.MINOR.PATCH".
@@ -178,11 +178,11 @@ docker-compose -f .\docker-compose-infra.yml up -d
 
 *Windows*
 ```
-.\mvnw.cmd spring-boot:run
+.\mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 *Linux*
 ```
-./mvnw spring-boot:run
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 ## Postman
@@ -191,13 +191,13 @@ Todas as requisições estão disponíveis para execução no arquivo  `Empresti
 Existe também no repositório, o arquivo de configuração de ambiente para importar, contendo os valores da variável `url` local (`local.postman_environment.json`).
 
 ## RabbitMQ
----
+
 - [http://localhost:15672](http://localhost:15672)
 - **User:** admin
 - **Password:** admin
 
 ## Postgres
----
+
 #### PGAdmin
   - [http://localhost:5050](http://localhost:5050/)
   - **User:** admin@admin.com
