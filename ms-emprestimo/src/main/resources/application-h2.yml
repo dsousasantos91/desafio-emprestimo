@@ -6,7 +6,7 @@ spring:
     username: ${USER_DB:sa}
     driver-class-name: org.h2.Driver
   flyway:
-    enabled: true
+    enabled: false
   jpa:
     hibernate:
       ddl-auto: none
@@ -19,3 +19,7 @@ spring:
       enabled: true
       settings:
         web-allow-others: true
+  sql:
+    init:
+      schema-locations: classpath:db/h2/sql/schema.sql
+      mode: always
